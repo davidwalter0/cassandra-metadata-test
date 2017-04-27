@@ -1,0 +1,28 @@
+#!/bin/bash
+
+<<EOF
+
+http://cassandra.apache.org/doc/latest/getting_started/installing.html
+
+The default location of configuration files is /etc/cassandra.
+
+The default location of log and data directories is
+       /var/log/cassandra
+       /var/lib/cassandra
+
+
+"ExposedPorts": {
+    "22/tcp": {},
+    "61621/tcp": {},
+    "7000/tcp": {},
+    "7001/tcp": {},
+    "7199/tcp": {},
+    "8012/tcp": {},
+    "9042/tcp": {},
+    "9160/tcp": {}
+},
+EOF
+
+hostvolumes="--volume=/var/log/cassandra:/var/log/cassandra --volume=/var/lib/cassandra:/var/lib/cassandra"
+
+docker run --name=cassandra-1 --privileged -p 2200:22 -p 61621:61621 -p 7000:7000 -p 7001:7001 -p 7199:7199 -p 8012:8012 -p 9042:9042 -p 9160:9160 ${hostvolumes} davidwalter0/cassandra
